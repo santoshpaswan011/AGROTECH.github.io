@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech - Doctor Chat</title>
+    <link rel="stylesheet" href="doctor.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="pro1.png" alt="AgriTech Logo" class="logo-img">
+                <span>AgriTech</span>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="automation.html">Automation</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="sale.html">Shop</a></li>
+                <li><a href="doctor.html">Doctor</a></li>
+                <li><a href="cropsuggestion.html">Sugggestion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>Chat with an Agricultural Expert</h2>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message doctor-message">
+                    Hello! How can I help you with your crops today?
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Type your message here...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+        <button class="call-button" onclick="initiateCall()">Start Voice Call</button>
+        <p class="pricing">Chat: $0.50/minute | Voice Call: $1.00/minute</p>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: info@agritech.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="automation.html">Automation</a></li>
+                    <li><a href="weather.html">Weather</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">TW</a>
+                    <a href="#" class="social-icon">IN</a>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2023 AgriTech. All rights reserved.</p>
+    </footer>
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            if (message) {
+                const chatMessages = document.getElementById('chatMessages');
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user-message';
+                userMessage.textContent = message;
+                chatMessages.appendChild(userMessage);
+                input.value = '';
+                
+                // Simulate doctor's response
+                setTimeout(() => {
+                    const doctorMessage = document.createElement('div');
+                    doctorMessage.className = 'message doctor-message';
+                    doctorMessage.textContent = "Thank you for your message. An expert will respond shortly.";
+                    chatMessages.appendChild(doctorMessage);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        function initiateCall() {
+            // In a real application, this would initiate a voice call
+            alert('Initiating voice call... (This feature would be implemented in a real application)');
+        }
+
+        // Allow sending message with Enter key
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

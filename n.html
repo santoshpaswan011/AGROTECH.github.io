@@ -1,0 +1,79 @@
+<div class="logo">
+    <img src="/placeholder.svg?height=40&width=40" alt="AgriTech Logo" class="logo-img">
+    <span>AgriTech</span>
+</div>
+<ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="automation.html">Automation</a></li>
+    <li><a href="weather.html">Weather</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+</ul>
+<style>
+    :root {
+    --primary-color: #4CAF50;
+    --secondary-color: #45a049;
+    --accent-color: #FF9800;
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --card-background: #fff;
+}
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.logo-img {
+    margin-right: 0.5rem;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin-left: 1rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+nav ul li a:hover {
+    color: var(--accent-color);
+}
+</style>

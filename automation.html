@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech - Automation & Drone Mapping</title>
+    <link rel="stylesheet" href="automation.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="pro1.png" alt="AgriTech Logo" class="logo-img">
+                <span>AgriTech</span>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="automation.html">Automation</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="doctor.html">Doctor</a></li>
+                <li><a href="cropsuggestion.html">Sugggestion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="dashboard">
+            <div class="dashboard-item">
+                <h3>Irrigation System</h3>
+                <p>Status: Active</p>
+                <button onclick="toggleSystem('irrigation')">Turn Off</button>
+            </div>
+            <div class="dashboard-item">
+                <h3>Climate Control</h3>
+                <p>Status: Active</p>
+                <button onclick="toggleSystem('climate')">Turn Off</button>
+            </div>
+            <div class="dashboard-item">
+                <h3>Pest Control</h3>
+                <p>Status: Inactive</p>
+                <button onclick="toggleSystem('pest')">Turn On</button>
+            </div>
+            <div class="dashboard-item">
+                <h3>Soil Monitoring</h3>
+                <p>Status: Active</p>
+                <button onclick="toggleSystem('soil')">Turn Off</button>
+            </div>
+        </section>
+        
+        <section class="drone-map">
+            <h2>Drone Mapping Data</h2>
+            <div class="map-placeholder">
+                Drone Map Visualization
+            </div>
+            <div class="map-container">
+                <svg width="100%" height="600" viewBox="0 0 1000 600">
+                    <!-- Background -->
+                    <rect width="1000" height="600" fill="#8fbc8f" />
+                    
+                    <!-- Farm fields -->
+                    <g id="fields">
+                        <path d="M50,50 L950,50 L950,550 L50,550 Z" fill="#9acd32" stroke="#556b2f" stroke-width="2" />
+                        <path d="M50,180 L950,180" stroke="#556b2f" stroke-width="2" />
+                        <path d="M50,310 L950,310" stroke="#556b2f" stroke-width="2" />
+                        <path d="M50,440 L950,440" stroke="#556b2f" stroke-width="2" />
+                        <path d="M320,50 L320,550" stroke="#556b2f" stroke-width="2" />
+                        <path d="M590,50 L590,550" stroke="#556b2f" stroke-width="2" />
+                    </g>
+                    
+                    <!-- Data overlay -->
+                    <g id="data-overlay">
+                        <circle cx="200" cy="120" r="50" fill="rgba(255,0,0,0.3)" stroke="red" stroke-width="2" />
+                        <text x="200" y="120" text-anchor="middle" fill="#333" font-size="12">High Pesticide</text>
+                        
+                        <circle cx="450" cy="250" r="60" fill="rgba(0,0,255,0.3)" stroke="blue" stroke-width="2" />
+                        <text x="450" y="250" text-anchor="middle" fill="#333" font-size="12">Low Moisture</text>
+                        
+                        <circle cx="750" cy="380" r="70" fill="rgba(255,255,0,0.3)" stroke="yellow" stroke-width="2" />
+                        <text x="750" y="380" text-anchor="middle" fill="#333" font-size="12">Medium Health</text>
+                        
+                        <circle cx="300" cy="480" r="55" fill="rgba(0,255,0,0.3)" stroke="green" stroke-width="2" />
+                        <text x="300" y="480" text-anchor="middle" fill="#333" font-size="12">Good Health</text>
+                    </g>
+                    
+                    <!-- Drone path -->
+                    <path d="M50,50 Q500,0 950,50 T950,550 T50,550 T50,50" fill="none" stroke="#ff69b4" stroke-width="2" stroke-dasharray="5,5" />
+                    <circle cx="50" cy="50" r="5" fill="#ff69b4" />
+                    <text x="60" y="40" fill="#333" font-size="12">Start</text>
+                    <circle cx="950" cy="550" r="5" fill="#ff69b4" />
+                    <text x="900" y="570" fill="#333" font-size="12">End</text>
+                </svg>
+            </div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: rgba(255,0,0,0.3);"></div>
+                    <span>High Pesticide Requirement</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: rgba(0,0,255,0.3);"></div>
+                    <span>Low Moisture</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: rgba(255,255,0,0.3);"></div>
+                    <span>Medium Crop Health</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: rgba(0,255,0,0.3);"></div>
+                    <span>Good Crop Health</span>
+                </div>
+            </div>
+    
+        </section>
+        
+        <section class="data-section">
+            <div class="data-card">
+                <h3>Water Requirements</h3>
+                <div class="chart-container">
+                    <canvas id="waterChart"></canvas>
+                </div>
+            </div>
+            <div class="data-card">
+                <h3>Soil Moisture</h3>
+                <div class="chart-container">
+                    <canvas id="moistureChart"></canvas>
+                </div>
+            </div>
+            <div class="data-card">
+                <h3>Temperature</h3>
+                <div class="chart-container">
+                    <canvas id="temperatureChart"></canvas>
+                </div>
+            </div>
+            <div class="data-card">
+                <h3>Crop Health Index</h3>
+                <div class="chart-container">
+                    <canvas id="healthChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: info@agritech.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="automation.html">Automation</a></li>
+                    <li><a href="weather.html">Weather</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">TW</a>
+                    <a href="#" class="social-icon">IN</a>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2023 AgriTech. All rights reserved.</p>
+    </footer>
+    <script>
+        function toggleSystem(system) {
+            const button = event.target;
+            const statusElement = button.previousElementSibling;
+            if (button.textContent === 'Turn Off') {
+                button.textContent = 'Turn On';
+                statusElement.textContent = 'Status: Inactive';
+            } else {
+                button.textContent = 'Turn Off';
+                statusElement.textContent = 'Status: Active';
+            }
+        }
+
+        // Sample data for charts
+        const labels = ['Zone A', 'Zone B', 'Zone C', 'Zone D', 'Zone E'];
+        const waterData = [30, 45, 25, 60, 40];
+        const moistureData = [60, 55, 70, 45, 65];
+        const temperatureData = [25, 27, 24, 26, 28];
+        const healthData = [85, 90, 75, 95, 80];
+
+        // Create charts
+        function createChart(id, label, data, color) {
+            const ctx = 
+
+ document.getElementById(id).getContext('2d');
+            return new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        backgroundColor: color,
+                        borderColor: color,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        createChart('waterChart', 'Water Requirements (mm)', waterData, 'rgba(54, 162, 235, 0.6)');
+        createChart('moistureChart', 'Soil Moisture (%)', moistureData, 'rgba(75, 192, 192, 0.6)');
+        createChart('temperatureChart', 'Temperature (°C)', temperatureData, 'rgba(255, 99, 132, 0.6)');
+        createChart('healthChart', 'Crop Health Index', healthData, 'rgba(153, 102, 255, 0.6)');
+    </script>
+</body>
+</html>

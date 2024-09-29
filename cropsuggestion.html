@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech - Smart Farming Solutions</title>
+    <link rel="stylesheet" href="cropsuggestion.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        
+        
+       
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="pro1.png" alt="AgriTech Logo" class="logo-img">
+                <span>AgriTech</span>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="automation.html">Automation</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="sale.html">Shop</a></li>
+                <li><a href="doctor.html">Doctor</a></li>
+                <li><a href="cropsuggestion.html">Sugggestion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="crop-suggestion">
+    <h2>Crop Suggestion</h2>
+    <form id="cropSuggestionForm">
+        <select id="soilType" required>
+            <option value="">Select Soil Type</option>
+            <option value="Clay">Clay</option>
+            <option value="Sandy">Sandy</option>
+            <option value="Loamy">Loamy</option>
+            <option value="Silt">Silt</option>
+        </select>
+        <input type="number" id="averageRainfall" placeholder="Average Annual Rainfall (mm)" required>
+        <input type="number" id="averageTemperature" placeholder="Average Temperature (°C)" required>
+        <button type="submit">Get Crop Suggestions</button>
+    </form>
+    <div id="cropSuggestions">
+        <!-- Crop suggestions will be populated here -->
+    </div>
+</section>
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Contact Us</h4>
+            <p>Email: info@agritech.com</p>
+            <p>Phone: (123) 456-7890</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="automation.html">Automation</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Follow Us</h4>
+            <div class="social-icons">
+                <a href="#" class="social-icon">FB</a>
+                <a href="#" class="social-icon">TW</a>
+                <a href="#" class="social-icon">IN</a>
+            </div>
+        </div>
+    </div>
+    <p class="copyright">&copy; 2023 AgriTech. All rights reserved.</p>
+</footer>
+
+<script>
+
+// Crop suggestion
+        document.getElementById('cropSuggestionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const soilType = document.getElementById('soilType').value;
+            const rainfall = document.getElementById('averageRainfall').value;
+            const temperature = document.getElementById('averageTemperature').value;
+
+            // In a real application, this would send a request to the server for suggestions
+            // Here, we'll use a simple algorithm for demonstration
+            const suggestions = getCropSuggestions(soilType, rainfall, temperature);
+
+            const suggestionsHtml = suggestions.map(crop => `
+                <div class="crop-suggestion">
+                    <h3>${crop.name}</h3>
+                    <p>Suitability: ${crop.suitability}%</p>
+                </div>
+            `).join('');
+
+            document.getElementById('cropSuggestions').innerHTML = suggestionsHtml;
+        });
+
+        // Simple crop suggestion algorithm (for demonstration purposes)
+        function getCropSuggestions(soilType, rainfall, temperature) {
+            const crops = [
+                { name: 'Wheat', soilTypes: ['Loamy', 'Clay'], minRainfall: 500, maxRainfall: 700, minTemp: 15, maxTemp: 25 },
+                { name: 'Corn', soilTypes: ['Loamy', 'Sandy'], minRainfall: 600, maxRainfall: 1000, minTemp: 20, maxTemp: 30 },
+                { name: 'Rice', soilTypes: ['Clay'], minRainfall: 1000, maxRainfall: 2000, minTemp: 20, maxTemp: 35 },
+                { name: 'Soybeans', soilTypes: ['Loamy', 'Clay'], minRainfall: 500, maxRainfall: 900, minTemp: 18, maxTemp: 28 },
+                { name: 'Cotton', soilTypes: ['Loamy', 'Sandy'], minRainfall: 700, maxRainfall: 1300, minTemp: 20, maxTemp: 30 }
+            ];
+
+            return crops.map(crop => {
+                let suitability = 0;
+                if (crop.soilTypes.includes(soilType)) suitability += 33;
+                if (rainfall >= crop.minRainfall && rainfall <= crop.maxRainfall) suitability += 33;
+                if (temperature >= crop.minTemp && temperature <= crop.maxTemp) suitability += 34;
+                return { name: crop.name, suitability: suitability };
+            }).sort((a, b) => b.suitability - a.suitability);
+        }
+    </script>
+    </body>
+</html>

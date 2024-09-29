@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech - Smart Farming Solutions</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="pro1.png" alt="AgriTech Logo" class="logo-img">
+                <span>AgroTech</span>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="automation.html">Automation</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="sale.html">Shop</a></li>
+                <li><a href="doctor.html">Doctor</a></li>
+                <li><a href="cropsuggestion.html">Sugggestion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="notifications"></div>
+    <main>
+        <section id="dashboard">
+            <h2>Farmer Dashboard</h2>
+            <div class="dashboard">
+                <div class="dashboard-item">
+                    <h3>Total Area</h3>
+                    <p id="totalArea">Loading...</p>
+                </div>
+                <div class="dashboard-item">
+                    <h3>Main Crops</h3>
+                    <p id="mainCrops">Loading...</p>
+                </div>
+                <div class="dashboard-item">
+                    <h3>Soil Health</h3>
+                    <p id="soilHealth">Loading...</p>
+                </div>
+                <div class="dashboard-item">
+                    <h3>Next Task</h3>
+                    <p id="nextTask">Loading...</p>
+                </div>
+            </div>
+        </section>
+        <section id="weather">
+            <h2>Weather Forecast</h2>
+            <div class="weather-forecast" id="weatherForecast">
+                <!-- Weather forecast will be populated here -->
+            </div>
+            <h3>Hourly Forecast</h3>
+            <div id="hourlyForecast">
+                <!-- Hourly forecast will be populated here -->
+            </div>
+        </section>
+        <section id="crop-management">
+            <h2>Crop Management</h2>
+            <div class="crop-status" id="cropStatus">
+                <!-- Crop status will be populated here -->
+            </div>
+            <h3>Crop Yields</h3>
+            <canvas id="cropYieldChart"></canvas>
+            <h3>Add New Crop</h3>
+            <form id="newCropForm">
+                <input type="text" id="cropName" placeholder="Crop Name" required>
+                <input type="date" id="plantingDate" required>
+                <input type="date" id="harvestDate" required>
+                <select id="cropHealth" required>
+                    <option value="">Select Health Status</option>
+                    <option value="Excellent">Excellent</option>
+                    <option value="Good">Good</option>
+                    <option value="Fair">Fair</option>
+                    <option value="Poor">Poor</option>
+                </select>
+                <button type="submit">Add Crop</button>
+            </form>
+        </section>
+        <section id="automation">
+            <h2>Automation Systems</h2>
+            <div class="dashboard" id="automationSystems">
+                <!-- Automation systems will be populated here -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: info@agritech.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="automation.html">Automation</a></li>
+                    <li><a href="weather.html">Weather</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">TW</a>
+                    <a href="#" class="social-icon">IN</a>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2023 AgriTech. All rights reserved.</p>
+    </footer>
+    <script>
+
+    const nav = document.querySelector('.navbar')
+fetch('/n.html')
+.then(res=>res.text())
+.then(data=>{
+    nav.innerHTML=data
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(data, 'text/html')
+    eval(doc.querySelector('script').textContent)
+})
+
+        // Simulated API calls
+        function fetchData(endpoint) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    switch(endpoint) {
+                        case 'dashboard':
+                            resolve({
+                                totalArea: '100 acres',
+                                mainCrops: 'Wheat, Corn, Soybeans',
+                                soilHealth: 'Good',
+                                nextTask: 'Fertilize Corn Field'
+                            });
+                            break;
+                        case 'weather':
+                            resolve({
+                                forecast: [
+                                    { day: 'Today', icon: '🌤️', temp: 25 },
+                                    { day: 'Tomorrow', icon: '☀️', temp: 28 },
+                                    { day: 'Wednesday', icon: '🌦️', temp: 22 },
+                                    { day: 'Thursday', icon: '☀️', temp: 26 },
+                                    { day: 'Friday', icon: '🌤️', temp: 24 }
+                                ],
+                                hourly: [
+                                    { time: '9:00', icon: '🌤️', temp: 22 },
+                                    { time: '10:00', icon: '🌤️', temp: 23 },
+                                    { time: '11:00', icon: '☀️', temp: 25 },
+                                    { time: '12:00', icon: '☀️', temp: 26 },
+                                    { time: '13:00', icon: '☀️', temp: 27 },
+                                    { time: '14:00', icon: '🌤️', temp: 26 },
+                                    { time: '15:00', icon: '🌤️', temp: 25 },
+                                    { time: '16:00', icon: '🌤️', temp: 24 }
+                                ]
+                            });
+                            break;
+                        case 'crops':
+                            resolve([
+                                { name: 'Wheat', growthStage: 'Flowering', health: 'Good', planted: '2023-03-15', harvest: '2023-07-30', lastFertilized: '2023-05-01' },
+                                { name: 'Corn', growthStage: 'Vegetative', health: 'Excellent', planted: '2023-04-01', harvest: '2023-09-15', lastFertilized: '2023-05-15' },
+                                { name: 'Soybeans', growthStage: 'Seedling', health: 'Fair', planted: '2023-05-15', harvest: '2023-10-30', lastFertilized: '2023-06-01' }
+                            ]);
+                            break;
+                        case 'automation':
+                            resolve([
+                                { name: 'Irrigation System', status: 'Active' },
+                                { name: 'Climate Control', status: 'Inactive' },
+                                { name: 'Pest Control', status: 'Active' },
+                                { name: 'Soil Monitoring', status: 'Active' }
+                            ]);
+                            break;
+                    }
+                }, 1000);
+            });
+        }
+
+        // Update dashboard
+        function updateDashboard() {
+            fetchData('dashboard').then(data => {
+                document.getElementById('totalArea').textContent = data.totalArea;
+                document.getElementById('mainCrops').textContent = data.mainCrops;
+                document.getElementById('soilHealth').textContent = data.soilHealth;
+                document.getElementById('nextTask').textContent = data.nextTask;
+            });
+        }
+
+        // Update weather
+        function updateWeather() {
+            fetchData('weather').then(data => {
+                const forecastHtml = data.forecast.map(day => `
+                    <div class="weather-day">
+                        <h3>${day.day}</h3>
+                        <p>${day.icon}</p>
+                        <p>${day.temp}°C</p>
+                    </div>
+                `).join('');
+                document.getElementById('weatherForecast').innerHTML = forecastHtml;
+
+                const hourlyHtml = data.hourly.map(hour => `
+                    <div class="hourly-item">
+                        <p>${hour.time}</p>
+                        <p>${hour.icon}</p>
+                        <p>${hour.temp}°C</p>
+                    </div>
+                `).join('');
+                document.getElementById('hourlyForecast').innerHTML = hourlyHtml;
+            });
+        }
+
+        // Update crop management
+        function updateCropManagement() {
+            fetchData('crops').then(crops => {
+                const cropStatusHtml = crops.map(crop => `
+                    <div class="crop-item">
+                        <h3>${crop.name}</h3>
+                        <p>Growth Stage: ${crop.growthStage}</p>
+                        <p>Health: ${crop.health}</p>
+                        <button onclick="showCropDetails('${crop.name}')">View Details</button>
+                        <div id="${crop.name}-details" class="hidden">
+                            <p>Planted: ${crop.planted}</p>
+                            <p>Expected Harvest: ${crop.harvest}</p>
+                            <p>Last Fertilized: ${crop.lastFertilized}</p>
+                        </div>
+                    </div>
+                `).join('');
+                document.getElementById('cropStatus').innerHTML = cropStatusHtml;
+
+                // Update crop yield chart
+                const ctx = document.getElementById('cropYieldChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: crops.map(crop => crop.name),
+                        datasets: [{
+                            label: 'Expected Yield (tons/acre)',
+                            data: crops.map(() => Math.random() * 10 + 5), // Random data for demonstration
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.6)',
+                                'rgba(54, 162, 235, 0.6)',
+                                'rgba(255, 206, 86, 0.6)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        // Update automation systems
+        function updateAutomation() {
+            fetchData('automation').then(systems => {
+                const automationHtml = systems.map(system => `
+                    <div class="dashboard-item">
+                        <h3>${system.name}</h3>
+                        <p>Status: ${system.status}</p>
+                        <button onclick="toggleAutomation('${system.name}')">${system.status === 'Active' ? 'Turn Off' : 'Turn On'}</button>
+                    </div>
+                `).join('');
+                document.getElementById('automationSystems').innerHTML = automationHtml;
+            });
+        }
+
+        // Show crop details
+        function showCropDetails(crop) {
+            const detailsElement = document.getElementById(`${crop}-details`);
+            detailsElement.classList.toggle('hidden');
+        }
+
+        // Toggle automation
+        function toggleAutomation(system) {
+            // In a real application, this would send a request to the server
+            const button = event.target;
+            const statusElement = button.previousElementSibling;
+            if (button.textContent === 'Turn Off') {
+                button.textContent = 'Turn On';
+                statusElement.textContent = 'Status: Inactive';
+            } else {
+                button.textContent = 'Turn Off';
+                statusElement.textContent = 'Status: Active';
+            }
+            showNotification(`${system} has been ${button.textContent === 'Turn Off' ? 'activated' : 'deactivated'}.`);
+        }
+
+        // Add new crop
+        document.getElementById('newCropForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const cropName = document.getElementById('cropName').value;
+            const plantingDate = document.getElementById('plantingDate').value;
+            const harvestDate = document.getElementById('harvestDate').value;
+            const cropHealth = document.getElementById('cropHealth').value;
+
+            // In a real application, this would send a POST request to the server
+            showNotification(`New crop added: ${cropName}`);
+            this.reset();
+            updateCropManagement();
+        });
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.getElementById('notifications').appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Initial load
+        updateDashboard();
+        updateWeather();
+        updateCropManagement();
+        updateAutomation();
+
+        // Simulated real-time updates
+        setInterval(() => {
+            updateDashboard();
+            updateWeather();
+            updateCropManagement();
+            updateAutomation();
+        }, 60000); // Update every minute
+    </script>
+</body>
+</html>

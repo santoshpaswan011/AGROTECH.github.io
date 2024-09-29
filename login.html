@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech - Login</title>
+    <link rel="stylesheet" href="login.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>AgriTech Login</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="submit-button">Login</button>
+        </form>
+        <div class="register-link">
+            <p>Don't have an account? <a href="#">Register here</a></p>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: info@agritech.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="automation.html">Automation</a></li>
+                    <li><a href="weather.html">Weather</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">TW</a>
+                    <a href="#" class="social-icon">IN</a>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2023 AgriTech. All rights reserved.</p>
+    </footer>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            // In a real application, you would send this data to a server for authentication
+            console.log('Login attempt:', { username, password });
+            alert('Login functionality would be implemented here.');
+        });
+    </script>
+</body>
+</html>
